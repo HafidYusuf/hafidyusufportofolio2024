@@ -1389,6 +1389,9 @@ a.underline {
         max-width: 640px;
         font-size: 24pt;
         margin-bottom: 24px;
+        span .char {
+            font-family: "Times New Roman", Times, serif;
+        }
 
         .char {
             font-family: Montaigne-bold;
@@ -2026,12 +2029,18 @@ a.underline {
     top:0;
     width: 100%;
     height: 0%;
-    background-color: #181818;
+    background-color: #101010;
     z-index: 9999;
     display: flex;
     justify-content: center;
     align-items: center;
-    h2 .char{
-        opacity: 0;
+    h2 {
+        span .char {
+            font-family: "Times New Roman", Times, serif;
+        }
+        .char{
+            opacity: 0;
+            font-family: Montaigne-bold;
+        }
     }
 }

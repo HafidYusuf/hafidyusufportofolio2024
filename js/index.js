@@ -27,8 +27,8 @@ const indexAnimationEnter = (container) => {
     var nav = $('nav a');
     var burger = $(".menu-toggle");
 
-    TweenMax.staggerFrom(nav, 2, {y:-20,autoAlpha:0,ease:Power4.easeOut,delay:1},.1);
-    TweenMax.from(burger, 1, {y:-20,autoAlpha:0,ease:Power4.easeOut,delay:1.5},.1);
+    TweenMax.staggerFrom(nav, 2, {y:-20,autoAlpha:0,ease:Power4.easeOut,delay:2},.1);
+    TweenMax.from(burger, 1, {y:-20,autoAlpha:0,ease:Power4.easeOut,delay:2.5},.1);
 
     //ADDING GRADIENT TO THE NAVBAR
     $(window).scroll(function() {
@@ -46,21 +46,25 @@ const indexAnimationEnter = (container) => {
         autoAlpha: 0,
     }) 
 
-    ScrollTrigger.batch(".headline .word, .headline .emoji", {
-        start: "top bottom-=100px",
-        onEnter: (batch) =>
-        TweenMax.staggerTo(batch, 1, {
-            y: 0,
-            autoAlpha: 1,
-            ease: Power4.easeOut
-        }, .03),
-        onLeaveBack: (batch) =>
-        gsap.to(batch, 1, {
-            y: 10,
-            autoAlpha: 0,
-            ease: Power4.easeOut
-        })
-    });
+    gsap.delayedCall(3, batchy)
+
+    function batchy (){
+        ScrollTrigger.batch(".headline .word, .headline .emoji", {
+            start: "top bottom-=100px",
+            onEnter: (batch) =>
+            TweenMax.staggerTo(batch, 1, {
+                y: 0,
+                autoAlpha: 1,
+                ease: Power4.easeOut
+            }, .03),
+            onLeaveBack: (batch) =>
+            gsap.to(batch, 1, {
+                y: 10,
+                autoAlpha: 0,
+                ease: Power4.easeOut
+            })
+        });
+    }
 
     //NAV FUNCTION FOR MOBILE
     $('.menu-toggle').click(function () {
@@ -113,7 +117,7 @@ const coverAnimationLeave = () => {
 
     var tl = gsap.timeline();
     return tl
-    .to($(".cover-transition"), {duration: 1.2, height: "100%", ease: "Expo.easeInOut",})
+    .to($(".cover-transition"), {duration: 1, height: "100%", ease: "Expo.easeInOut",})
 }
 const coverAnimationEnter = () => {
     Splitting();
@@ -122,9 +126,9 @@ const coverAnimationEnter = () => {
 
     var tl = gsap.timeline();
     return tl
-    .to($(".cover-transition h2 .char"), {y: 0, autoAlpha:1, stagger: 0.03})
+    .to($(".cover-transition h2 .char"), {y: 0, autoAlpha:1, stagger: 0.02})
     .to($(".cover-transition h2 .char"), {y: -10, autoAlpha:0})
-    .to($(".cover-transition"), {duration: 1.2, height: "0%",top: "0", ease: "Expo.easeInOut"})
+    .to($(".cover-transition"), {duration: 1, height: "0%",top: "0", ease: "Expo.easeInOut"})
     .set($(".cover-transition"), {height: "0%", bottom: 0, top: "auto"})
 }
 /* End of Page Transition Cover */
@@ -138,10 +142,10 @@ function homeInit(container) {
     var divider = $(".divider");
     var intro = $(".intro .splitting .word");
 
-    TweenMax.from(coins, 2, {autoAlpha:0});
-    TweenMax.staggerFrom(name, 2, {y:10,autoAlpha:0,ease:Power4.easeOut,delay:2},.08);
-    TweenMax.from(divider, {height:0,autoAlpha:0,ease:Power4.easeOut,delay:2.5});
-    TweenMax.staggerFrom(intro, 2, {y:10,autoAlpha:0,ease:Power4.easeOut,delay:3},.03);
+    TweenMax.from(coins, 2, {autoAlpha:0, delay: 2});
+    TweenMax.staggerFrom(name, 2, {y:10,autoAlpha:0,ease:Power4.easeOut,delay:4},.08);
+    TweenMax.from(divider, {height:0,autoAlpha:0,ease:Power4.easeOut,delay:4.5});
+    TweenMax.staggerFrom(intro, 2, {y:10,autoAlpha:0,ease:Power4.easeOut,delay:5},.03);
 }
 /* End of Homepage First Build Up Animation */
 
@@ -152,9 +156,9 @@ function aboutInit(container) {
     var abtitle = container.querySelectorAll('.about-title .word');
     var abdesc = container.querySelectorAll('.about-intro .word');
   
-    TweenMax.from(abpic, 1, {y:100,scaleY:1.3,autoAlpha:0,ease:Power4.easeOut,delay:.5});
-    TweenMax.staggerFrom(abtitle, 1, {y:10,autoAlpha:0,ease:Power4.easeOut,delay:1},.02);
-    TweenMax.staggerFrom(abdesc, 1, {y:10,autoAlpha:0,ease:Power4.easeOut,delay:1.5},.02);
+    TweenMax.from(abpic, 1, {y:100,scaleY:1.3,autoAlpha:0,ease:Power4.easeOut,delay:2.5});
+    TweenMax.staggerFrom(abtitle, 1, {y:10,autoAlpha:0,ease:Power4.easeOut,delay:3},.02);
+    TweenMax.staggerFrom(abdesc, 1, {y:10,autoAlpha:0,ease:Power4.easeOut,delay:3.5},.02);
 }
 /* End of About First Build Up Animation */
 
@@ -163,7 +167,7 @@ function aboutInit(container) {
 function radialBackgroundInit(container) {
     gsap.to(container.querySelectorAll(".works-page-container"), {
         "background": "radial-gradient(40% 20% at 50% 20%, rgba(44, 88, 241, 1) 0%, rgba(44, 88, 241, 0.00) 100%)",
-        delay: 1
+        delay: 5
     });
 }
 /* End of Radial Background Build Up Animation */
@@ -183,7 +187,7 @@ function detailInit(container) {
     gsap.set(element, {autoAlpha:0});
 
     tl
-    .to(img, 1, {bottom:"0%",ease:Power4.easeOut,delay: 1})
+    .to(img, 1, {bottom:"0%",ease:Power4.easeOut,delay: 3})
     .staggerFrom(link, 1, {y:10,autoAlpha:0,ease:Power4.easeOut},.02)
     .from(icon, 1, {y:10,autoAlpha:0,ease:Power4.easeOut},"-=100%")
     .staggerFrom(title, 1, {y:10,autoAlpha:0,ease:Power4.easeOut},.08)
@@ -394,35 +398,39 @@ function articlesAnimation(container){
     gsap.set('.article-img img, .article-date .word, .article-title .word, .article-desc .word', {y: 10, autoAlpha:0})
     gsap.set('.article-img .border', {"background": "linear-gradient(to bottom, #fff 0%, #000 0%, #000 100%, #5177FF 100%)", autoAlpha:0})
     
-    ScrollTrigger.batch('.each-article', {
-        start: 'top bottom',
-        onEnter: batch => {
-          batch.forEach((card, index) => {
-    
-            let border = card.querySelectorAll('.article-img .border');
-            let content = card.querySelectorAll('.article-img img, .article-date .word, .article-title .word, .article-desc .word, .article-img img');
-            let chart_tl = gsap.timeline();
-    
-            chart_tl.to( content, 0.6, {
-                y: 0,
-                autoAlpha: 1,
-                stagger: 0.03,
-                delay: index * 0.2,
-                marker: true,
-                ease: Power3.easeOut
-            }, .8 );
-            chart_tl.to( border, 1.2, {
-                "background": "linear-gradient(to bottom, #fff 0%, #000 50%, #000 50%, #5177FF 100%)",
-                autoAlpha: 1,
-                stagger: 0.03,
-                delay: index * 0.2,
-                ease: Power3.easeOut
-            }, 1 );
-      
-          })
-        },
-        once: true
-    });
+    gsap.delayedCall(3, batcho)
+
+    function batcho() {
+        ScrollTrigger.batch('.each-article', {
+            start: 'top bottom',
+            onEnter: batch => {
+            batch.forEach((card, index) => {
+        
+                let border = card.querySelectorAll('.article-img .border');
+                let content = card.querySelectorAll('.article-img img, .article-date .word, .article-title .word, .article-desc .word, .article-img img');
+                let chart_tl = gsap.timeline();
+        
+                chart_tl.to( content, 0.6, {
+                    y: 0,
+                    autoAlpha: 1,
+                    stagger: 0.03,
+                    delay: index * 0.2,
+                    marker: true,
+                    ease: Power3.easeOut
+                }, .8 );
+                chart_tl.to( border, 1.2, {
+                    "background": "linear-gradient(to bottom, #fff 0%, #000 50%, #000 50%, #5177FF 100%)",
+                    autoAlpha: 1,
+                    stagger: 0.03,
+                    delay: index * 0.2,
+                    ease: Power3.easeOut
+                }, 1 );
+        
+            })
+            },
+            once: true
+        });
+    }
 }
 /* End of Articles Whole Animation */
 
@@ -433,33 +441,37 @@ function worksAnimation(container){
     gsap.set('.work-img img', { scale: 1.3, autoAlpha: 0 })
     gsap.set('.work-title .word, .work-tags .word, .work-link .char, .work-link img', { y: 10, autoAlpha: 0 })
     
-    ScrollTrigger.batch('.each-work', {
-        start: 'top bottom-=100px',
-        onEnter: batch => {
-            batch.forEach((card, index) => {
-    
-                let img = card.querySelectorAll('.work-img img');
-                let content = card.querySelectorAll('.work-title .word, .work-tags .word, .work-link .char, .work-link img');
-                let chart_tl = gsap.timeline();
-    
-                chart_tl.to(img, 1.2, {
-                    scale: 1,
-                    autoAlpha: 1,
-                    delay: index * 0.2,
-                    ease: Power3.easeOut
-                }, 0.4);
-                chart_tl.to(content, 0.6, {
-                    y: 0,
-                    autoAlpha: 1,
-                    stagger: 0.03,
-                    delay: index * 0.2,
-                    ease: Power3.easeOut
-                }, 1);
-    
-            })
-        },
-        once: true
-    });
+    gsap.delayedCall(3, batch)
+
+    function batch(){
+        ScrollTrigger.batch('.each-work', {
+            start: 'top bottom-=100px',
+            onEnter: batch => {
+                batch.forEach((card, index) => {
+        
+                    let img = card.querySelectorAll('.work-img img');
+                    let content = card.querySelectorAll('.work-title .word, .work-tags .word, .work-link .char, .work-link img');
+                    let chart_tl = gsap.timeline();
+        
+                    chart_tl.to(img, 1.2, {
+                        scale: 1,
+                        autoAlpha: 1,
+                        delay: index * 0.2,
+                        ease: Power3.easeOut
+                    }, 0.4);
+                    chart_tl.to(content, 0.6, {
+                        y: 0,
+                        autoAlpha: 1,
+                        stagger: 0.03,
+                        delay: index * 0.2,
+                        ease: Power3.easeOut
+                    }, 1);
+        
+                })
+            },
+            once: true
+        });
+    }
     
     gsap.set('.cap', { autoAlpha: 0 })
     gsap.set('.cap h2 .char', { y: 10, autoAlpha: 0 })
@@ -486,12 +498,11 @@ function resourcesAnimation(container){
         opacity: 0
     });
 
-    gsap.to($(".resources spline-viewer"), 3, {
-        immediateRender: false,
-        scale: 1,
-        opacity: 1,
-        ease: "elastic.out(1,0.3)",
-        stagger: 0.3,
+    gsap.delayedCall(3, batchu)
+    
+    gsap.from($(".resources div"), 1, {
+        autoAlpha: 0,
+        delay: 3,
         scrollTrigger: {
         trigger: ".resources",
         start: "top center",
@@ -499,6 +510,22 @@ function resourcesAnimation(container){
         toggleActions: "restart none none reverse"
         },
     });
+
+    function batchu() {
+        gsap.to($(".resources spline-viewer"), 3, {
+            immediateRender: false,
+            scale: 1,
+            opacity: 1,
+            ease: "elastic.out(1,0.3)",
+            stagger: 0.3,
+            scrollTrigger: {
+            trigger: ".resources",
+            start: "top center",
+            end: "bottom top",
+            toggleActions: "restart none none reverse"
+            },
+        });
+    }
 
     //SUBSCRIPTION ANIMATION
     gsap.set('.subscription', {scaleX:0})
