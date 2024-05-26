@@ -1,4 +1,5 @@
 // FIRST BUILD UP
+/*
 $(document).ready(function(){
     var coins = $('.hero spline-viewer');
     var name = $(".name .splitting .char");
@@ -9,10 +10,10 @@ $(document).ready(function(){
     TweenMax.staggerFrom(name, 2, {y:10,autoAlpha:0,ease:Power4.easeOut,delay:2},.08);
     TweenMax.from(divider, {height:0,autoAlpha:0,ease:Power4.easeOut,delay:2.5});
     TweenMax.staggerFrom(intro, 2, {y:10,autoAlpha:0,ease:Power4.easeOut,delay:3},.03);
-    console.log('test')
 });
+*/
 
-
+/*
 //GRID EFFECT
 import { preloadImages } from './../utils.js';
 let lenis;
@@ -168,7 +169,7 @@ gsap.to($(".article"), {
       toggleActions: "restart none none reverse"
     },
 });
-
+*/
 
 //RESOURCES ANIMATION
 gsap.set($(".resources spline-viewer"), {
