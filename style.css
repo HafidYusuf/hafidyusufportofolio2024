@@ -1895,4 +1895,10 @@ a.underline:hover::after {
   height: 0%;
   background-color: #181818;
   z-index: 9999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.cover-transition h2 .char {
+  opacity: 0;
 }/*# sourceMappingURL=style.css.map */

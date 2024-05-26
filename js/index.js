@@ -108,17 +108,24 @@ const indexAnimationEnter = (container) => {
 
 /* Page Transition Cover (In & Out Animation) */
 const coverAnimationLeave = () => {
+    gsap.set($(".cover-transition h2 .char"), {y:10, autoAlpha:0});
+    gsap.set($(".cover-transition"), {height: "0%", bottom: 0, top: "auto"});
+
     var tl = gsap.timeline();
     return tl
     .to($(".cover-transition"), {duration: 1.2, height: "100%", ease: "Expo.easeInOut",})
-    .set($(".cover-transition"), {height: "0%", top: 0, bottom: "auto"})
 }
 const coverAnimationEnter = () => {
-    gsap.set($(".cover-transition"), {height: "100%", top: "auto"})
+    Splitting();
+    gsap.set($(".cover-transition h2 .char"), {y:10, autoAlpha:0});
+    gsap.set($(".cover-transition"), {height: "100%", bottom: "auto", top: 0});
+
     var tl = gsap.timeline();
     return tl
-    .to($(".cover-transition"), {duration: 1.2, height: "0%",bottom: "0", ease: "Expo.easeInOut"})
-    .set($(".cover-transition"), {height: "0%", top: 0, bottom: "auto"})
+    .to($(".cover-transition h2 .char"), {y: 0, autoAlpha:1, stagger: 0.03})
+    .to($(".cover-transition h2 .char"), {y: -10, autoAlpha:0})
+    .to($(".cover-transition"), {duration: 1.2, height: "0%",top: "0", ease: "Expo.easeInOut"})
+    .set($(".cover-transition"), {height: "0%", bottom: 0, top: "auto"})
 }
 /* End of Page Transition Cover */
 

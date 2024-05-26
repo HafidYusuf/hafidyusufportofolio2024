@@ -2028,4 +2028,10 @@ a.underline {
     height: 0%;
     background-color: #181818;
     z-index: 9999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    h2 .char{
+        opacity: 0;
+    }
 }
