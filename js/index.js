@@ -139,9 +139,56 @@ function homeInit(container) {
 /* End of Homepage First Build Up Animation */
 
 
+/* About First Build Up Animation */
+function aboutInit(container) {
+    var abpic = container.querySelectorAll('.about-container spline-viewer');
+    var abtitle = container.querySelectorAll('.about-title .word');
+    var abdesc = container.querySelectorAll('.about-intro .word');
+  
+    TweenMax.from(abpic, 1, {y:100,scaleY:1.3,autoAlpha:0,ease:Power4.easeOut,delay:.5});
+    TweenMax.staggerFrom(abtitle, 1, {y:10,autoAlpha:0,ease:Power4.easeOut,delay:1},.02);
+    TweenMax.staggerFrom(abdesc, 1, {y:10,autoAlpha:0,ease:Power4.easeOut,delay:1.5},.02);
+}
+/* End of About First Build Up Animation */
+
+
+/* Radial Background Build Up Animation */
+function radialBackgroundInit(container) {
+    gsap.to(container.querySelectorAll(".works-page-container"), {
+        "background": "radial-gradient(40% 20% at 50% 20%, rgba(44, 88, 241, 1) 0%, rgba(44, 88, 241, 0.00) 100%)",
+        delay: 1
+    });
+}
+/* End of Radial Background Build Up Animation */
+
+
+/* Detail Work First Build Up Animation */
+function detailInit(container) {
+    var img = $('.parallax-content');
+    var link = $('.client-link .char');
+    var title = $('.title .word');
+    var icon = $('.client-link svg');
+    var detail = $('.detail-right p');
+    var element = $('.detail-element-blue-bottom, .detail-element-blue');
+    var tl = gsap.timeline();
+
+    gsap.set(img, {bottom:"120%"});
+    gsap.set(element, {autoAlpha:0});
+
+    tl
+    .to(img, 1, {bottom:"0%",ease:Power4.easeOut,delay: 1})
+    .staggerFrom(link, 1, {y:10,autoAlpha:0,ease:Power4.easeOut},.02)
+    .from(icon, 1, {y:10,autoAlpha:0,ease:Power4.easeOut},"-=100%")
+    .staggerFrom(title, 1, {y:10,autoAlpha:0,ease:Power4.easeOut},.08)
+    .staggerFrom(detail, 1, {y:10,autoAlpha:0,ease:Power4.easeOut},.08)
+    .to(element, 1, {autoAlpha:1,ease:Power4.easeOut},"-=100%");
+}
+/* End of Detail Work First Build Up Animation */
+
+
 /* Homepage Whole Animation */
 function homeAnimation(container){
-
+    preloadImages();
     //GRID EFFECT
     let lenis;
     const grid = document.querySelector('.grid');
@@ -233,7 +280,7 @@ function homeAnimation(container){
         }
     })
     .to('.quotes-container', 1, {scaleX: 1, opacity: 1})
-    .to('.quotes .splitting .char', 1, {immediateRender: false, y: 0, opacity: 1, stagger: 0.03})
+    .to('.quotes .splitting .char', 1, {immediateRender: false, y: 0, opacity: 1, stagger: 0.02})
 
     //EXPERIENCE CHANGES ON MOBILE (FROM HOVER TO TAP)
     var mobile = (/iphone|ipod|ipad|android|blackberry|mini|windows\sce|palm/i.test(navigator.userAgent.toLowerCase()));  
@@ -293,19 +340,6 @@ function homeAnimation(container){
 /* End of Homepage Whole Animation */
 
 
-/* About First Build Up Animation */
-function aboutInit(container) {
-    var abpic = container.querySelectorAll('.about-container spline-viewer');
-    var abtitle = container.querySelectorAll('.about-title .word');
-    var abdesc = container.querySelectorAll('.about-intro .word');
-  
-    TweenMax.from(abpic, 1, {y:100,scaleY:1.3,autoAlpha:0,ease:Power4.easeOut});
-    TweenMax.staggerFrom(abtitle, 1, {y:10,autoAlpha:0,ease:Power4.easeOut,delay:.5},.02);
-    TweenMax.staggerFrom(abdesc, 1, {y:10,autoAlpha:0,ease:Power4.easeOut,delay:1},.02);
-}
-/* End of About First Build Up Animation */
-
-
 /* About Whole Animation */
 function aboutAnimation(container){
 
@@ -347,6 +381,192 @@ function aboutAnimation(container){
 /* End of About Whole Animation */
 
 
+/* Articles Whole Animation */
+function articlesAnimation(container){
+
+    gsap.set('.article-img img, .article-date .word, .article-title .word, .article-desc .word', {y: 10, autoAlpha:0})
+    gsap.set('.article-img .border', {"background": "linear-gradient(to bottom, #fff 0%, #000 0%, #000 100%, #5177FF 100%)", autoAlpha:0})
+    
+    ScrollTrigger.batch('.each-article', {
+        start: 'top bottom',
+        onEnter: batch => {
+          batch.forEach((card, index) => {
+    
+            let border = card.querySelectorAll('.article-img .border');
+            let content = card.querySelectorAll('.article-img img, .article-date .word, .article-title .word, .article-desc .word, .article-img img');
+            let chart_tl = gsap.timeline();
+    
+            chart_tl.to( content, 0.6, {
+                y: 0,
+                autoAlpha: 1,
+                stagger: 0.03,
+                delay: index * 0.2,
+                marker: true,
+                ease: Power3.easeOut
+            }, .8 );
+            chart_tl.to( border, 1.2, {
+                "background": "linear-gradient(to bottom, #fff 0%, #000 50%, #000 50%, #5177FF 100%)",
+                autoAlpha: 1,
+                stagger: 0.03,
+                delay: index * 0.2,
+                ease: Power3.easeOut
+            }, 1 );
+      
+          })
+        },
+        once: true
+    });
+}
+/* End of Articles Whole Animation */
+
+
+/* Works Whole Animation */
+function worksAnimation(container){
+
+    gsap.set('.work-img img', { scale: 1.3, autoAlpha: 0 })
+    gsap.set('.work-title .word, .work-tags .word, .work-link .char, .work-link img', { y: 10, autoAlpha: 0 })
+    
+    ScrollTrigger.batch('.each-work', {
+        start: 'top bottom-=100px',
+        onEnter: batch => {
+            batch.forEach((card, index) => {
+    
+                let img = card.querySelectorAll('.work-img img');
+                let content = card.querySelectorAll('.work-title .word, .work-tags .word, .work-link .char, .work-link img');
+                let chart_tl = gsap.timeline();
+    
+                chart_tl.to(img, 1.2, {
+                    scale: 1,
+                    autoAlpha: 1,
+                    delay: index * 0.2,
+                    ease: Power3.easeOut
+                }, 0.4);
+                chart_tl.to(content, 0.6, {
+                    y: 0,
+                    autoAlpha: 1,
+                    stagger: 0.03,
+                    delay: index * 0.2,
+                    ease: Power3.easeOut
+                }, 1);
+    
+            })
+        },
+        once: true
+    });
+    
+    gsap.set('.cap', { autoAlpha: 0 })
+    gsap.set('.cap h2 .char', { y: 10, autoAlpha: 0 })
+    
+    $('.each-work a').mouseenter(function () {
+        gsap.to($(this).find('.cap'), 0.5, { autoAlpha: 1 });
+        TweenMax.staggerTo($(this).find('h2 .char'), 0.5, { y: 0, autoAlpha: 1 }, 0.05);
+    })
+    
+    $('.each-work a').mouseleave(function () {
+        gsap.to($(this).find('.cap'), 0.5, { autoAlpha: 0 });
+        TweenMax.staggerTo($(this).find('h2 .char'), 0.5, { y: 10, autoAlpha: 0 }, 0.05);
+    })
+}
+/* End of Works Whole Animation */
+
+
+/* Resources Whole Animation */
+function resourcesAnimation(container){
+
+    //RESOURCES ANIMATION
+    gsap.set($(".resources spline-viewer"), {
+        scale: 0.3,
+        opacity: 0
+    });
+
+    gsap.to($(".resources spline-viewer"), 3, {
+        immediateRender: false,
+        scale: 1,
+        opacity: 1,
+        ease: "elastic.out(1,0.3)",
+        stagger: 0.3,
+        scrollTrigger: {
+        trigger: ".resources",
+        start: "top center",
+        end: "bottom top",
+        toggleActions: "restart none none reverse"
+        },
+    });
+
+    //SUBSCRIPTION ANIMATION
+    gsap.set('.subscription', {scaleX:0})
+    gsap.set('.subscription .subs-desc .word', {y: 10, autoAlpha:0})
+    gsap.set('.subscription form', {y: 10, autoAlpha:0})
+
+    gsap.timeline({
+        scrollTrigger:{
+        trigger:'.subscription',
+        start: "top bottom-=100px",
+        toggleActions: "restart none none reverse",
+        ease: Power4.easeOut
+        }
+    })
+    .to('.subscription', 1, {scaleX:1})
+    .staggerTo('.subscription .subs-desc .word', 0.3, {y: 0, autoAlpha:1},0.05)
+    .to('.subscription form', 1, {y: 0, autoAlpha:1})
+
+    //SHIMMER SHIMMER ANIMATION
+    const target1 = document.getElementById('shimmerWave1');
+    const target2 = document.getElementById('shimmerWave2');
+    function splitTextToSpans(targetElement) {
+        if (targetElement) {
+            const text = targetElement.textContent;
+            targetElement.innerHTML = '';
+            for (let character of text) {
+                const span = document.createElement('span');
+                if (character === ' ') {
+                    span.innerHTML = '&nbsp;';
+                } else {
+                    span.textContent = character;
+                }
+                targetElement.appendChild(span);
+            }
+        }
+    }
+    splitTextToSpans(target1);
+    splitTextToSpans(target2);
+}
+/* End of Resources Whole Animation */
+
+
+/* Detail Whole Animation */
+function detailAnimation(container){
+    //ADD PARALLAX TO DETAIL CONTENT
+    gsap.utils.toArray(".parallax-window .parallax-content").forEach((section, i) => {
+        const heightDiff = section.offsetHeight - section.parentElement.offsetHeight;
+
+        gsap.fromTo(section,{y: -heightDiff}, {
+            scrollTrigger: {
+                trigger: section.parentElement,
+                scrub: true
+            },
+            y: 100,
+            ease: "none"
+        });
+    });
+
+    //ADD A RADIAL BACKGROUND TO PARTICULAR SECTION IN DETAIL PAGE
+    gsap.to(".content-full", 2, {
+        "background": "radial-gradient(50% 50% at 50% 50%, #2C58F1 0%, rgba(44, 88, 241, 0.00) 100%)",
+        immediateRender: false,
+        ease: Power4.easeOut,
+        scrollTrigger: {
+        trigger: ".content-full",
+        start: "top center",
+        endTrigger: ".content-full",
+        end: "bottom centar",
+        toggleActions: "restart reverse restart reverse"
+        },
+    });
+}
+/* End of Detail Whole Animation */
+
+
 /* Kill ScrollTrigger (To Refresh Each Page Transition) */
 const cleanGSAP = () => {
 	ScrollTrigger.getAll().forEach( t => t.kill(false) )
@@ -364,6 +584,7 @@ barba.init({
         leave: ({current}) => coverAnimationLeave(current.container),
         enter({next}) {
             cleanGSAP();
+            $(window).scrollTop(0);
             coverAnimationEnter(next.container);
             indexAnimationEnter(next.container);
             initSmoothScrolling();
@@ -379,10 +600,12 @@ barba.init({
         leave: ({current}) => coverAnimationLeave(current.container),
         enter({next}) {
             cleanGSAP();
+            $(window).scrollTop(0);
             coverAnimationEnter(next.container);
             indexAnimationEnter(next.container);
             homeInit(next.container);
             homeAnimation(next.container);
+            resourcesAnimation(next.container);
             initSmoothScrolling();
         },
         once({next}) {
@@ -398,6 +621,7 @@ barba.init({
         leave: ({current}) => coverAnimationLeave(current.container),
         enter({next}) {
             cleanGSAP();
+            $(window).scrollTop(0);
             coverAnimationEnter(next.container);
             indexAnimationEnter(next.container);
             aboutInit(next.container);
@@ -408,6 +632,86 @@ barba.init({
             indexAnimationEnter(next.container);
             aboutInit(next.container);
             aboutAnimation(next.container);
+            initSmoothScrolling();
+        }
+    },
+    {
+        name: 'articles-tansition',//ARTICLES TRANSITION
+        to: {namespace: ['articles']},
+        leave: ({current}) => coverAnimationLeave(current.container),
+        enter({next}) {
+            cleanGSAP();
+            $(window).scrollTop(0);
+            coverAnimationEnter(next.container);
+            indexAnimationEnter(next.container);
+            radialBackgroundInit(next.container);
+            articlesAnimation(next.container);
+            initSmoothScrolling();
+        },
+        once({next}) {
+            indexAnimationEnter(next.container);
+            radialBackgroundInit(next.container);
+            articlesAnimation(next.container);
+            initSmoothScrolling();
+        }
+    },
+    {
+        name: 'works-tansition',//WORKS TRANSITION
+        to: {namespace: ['works']},
+        leave: ({current}) => coverAnimationLeave(current.container),
+        enter({next}) {
+            cleanGSAP();
+            $(window).scrollTop(0);
+            coverAnimationEnter(next.container);
+            indexAnimationEnter(next.container);
+            radialBackgroundInit(next.container);
+            worksAnimation(next.container);
+            initSmoothScrolling();
+        },
+        once({next}) {
+            indexAnimationEnter(next.container);
+            radialBackgroundInit(next.container);
+            worksAnimation(next.container);
+            initSmoothScrolling();
+        }
+    },
+    {
+        name: 'resources-tansition',//RESOURCES TRANSITION
+        to: {namespace: ['resources']},
+        leave: ({current}) => coverAnimationLeave(current.container),
+        enter({next}) {
+            cleanGSAP();
+            $(window).scrollTop(0);
+            coverAnimationEnter(next.container);
+            indexAnimationEnter(next.container);
+            radialBackgroundInit(next.container);
+            resourcesAnimation(next.container);
+            initSmoothScrolling();
+        },
+        once({next}) {
+            indexAnimationEnter(next.container);
+            radialBackgroundInit(next.container);
+            resourcesAnimation(next.container);
+            initSmoothScrolling();
+        }
+    },
+    {
+        name: 'detail-tansition',//DETAIL WORK TRANSITION
+        to: {namespace: ['detail']},
+        leave: ({current}) => coverAnimationLeave(current.container),
+        enter({next}) {
+            cleanGSAP();
+            $(window).scrollTop(0);
+            coverAnimationEnter(next.container);
+            indexAnimationEnter(next.container);
+            detailInit(next.container);
+            detailAnimation(next.container);
+            initSmoothScrolling();
+        },
+        once({next}) {
+            indexAnimationEnter(next.container);
+            detailInit(next.container);
+            detailAnimation(next.container);
             initSmoothScrolling();
         }
     }]

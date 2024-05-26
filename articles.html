@@ -35,92 +35,96 @@
     <link rel="stylesheet" href="https://unpkg.com/splitting/dist/splitting.css" />
     <link rel="stylesheet" href="https://unpkg.com/splitting/dist/splitting-cells.css" />
 
+    <!-- Spline -->
+    <script type="module" src="https://unpkg.com/@splinetool/viewer@1.4.0/build/spline-viewer.js"></script>
+
     <!-- Lottie -->
     <script src="https://unpkg.com/@dotlottie/player-component@latest/dist/dotlottie-player.mjs" type="module"></script>
 </head>
+
 <body data-barba="wrapper">
-
-    <div data-barba="container" data-barba-namespace="article">
-
-    <nav>
-        <div class="mobile-nav">
-            <a href="index.html">
-                <svg width="24" height="33" viewBox="0 0 24 33" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <rect width="6" height="24" fill="white"/>
-                    <rect x="18" y="9" width="6" height="24" fill="white"/>
-                    <rect x="9" y="9" width="6" height="15" fill="white"/>
-                    <rect x="15" y="9" width="6" height="15" transform="rotate(90 15 9)" fill="white"/>
-                    <rect x="24" width="6" height="15" transform="rotate(90 24 0)" fill="white"/>
-                    <rect x="24" y="18" width="6" height="15" transform="rotate(90 24 18)" fill="white"/>
-                    <rect x="18" y="27" width="6" height="18" transform="rotate(90 18 27)" fill="white"/>
-                </svg>
-            </a>
-            <div class="menu-toggle">
-                <img src="img/burger.svg">
-            </div>
-        </div>
-        <div class="menu">
-            <a class="nav-link" href="/resources.html"><dotlottie-player src="https://lottie.host/1c1bcbcf-2402-47bc-9371-de886771198c/AbjpYcmkC1.json" background="transparent" speed="1" style="width: 32px; height: 32px; display: inline-block; vertical-align: middle; margin-left: -6px; margin-top: -4px" loop autoplay></dotlottie-player>RESOURCES</a>
-            <a class="nav-link" href="/works.html">WORKS</a>
-            <a class="nav-link" href="/about.html">ABOUT</a>
-            <a class="nav-link" href="/articles.html">ARTICLES</a>
-            <a href="/contact">
-                <div class="button--calypso">
-                    <span>HIRE ME / START A PROJECT</span>
+    <div data-barba="container" data-barba-namespace="articles" class="barba-container">
+        <div class="cover-transition"></div>
+        <nav>
+            <div class="mobile-nav">
+                <a href="index.html">
+                    <svg width="24" height="33" viewBox="0 0 24 33" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <rect width="6" height="24" fill="white"/>
+                        <rect x="18" y="9" width="6" height="24" fill="white"/>
+                        <rect x="9" y="9" width="6" height="15" fill="white"/>
+                        <rect x="15" y="9" width="6" height="15" transform="rotate(90 15 9)" fill="white"/>
+                        <rect x="24" width="6" height="15" transform="rotate(90 24 0)" fill="white"/>
+                        <rect x="24" y="18" width="6" height="15" transform="rotate(90 24 18)" fill="white"/>
+                        <rect x="18" y="27" width="6" height="18" transform="rotate(90 18 27)" fill="white"/>
+                    </svg>
+                </a>
+                <div class="menu-toggle">
+                    <img src="img/burger.svg">
                 </div>
-            </a>
-        </div>
-    </nav>
+            </div>
+            <div class="menu">
+                <a class="nav-link" href="/resources.html"><dotlottie-player src="https://lottie.host/1c1bcbcf-2402-47bc-9371-de886771198c/AbjpYcmkC1.json" background="transparent" speed="1" style="width: 32px; height: 32px; display: inline-block; vertical-align: middle; margin-left: -6px; margin-top: -4px" loop autoplay></dotlottie-player>RESOURCES</a>
+                <a class="nav-link" href="/works.html">WORKS</a>
+                <a class="nav-link" href="/about.html">ABOUT</a>
+                <a class="nav-link" href="/articles.html">ARTICLES</a>
+                <a href="/contact.html">
+                    <div class="button--calypso">
+                        <span>HIRE ME / START A PROJECT</span>
+                    </div>
+                </a>
+            </div>
+        </nav>
 
-    <div class="container works-page-container">
-        <div class="headline headline-page">
-            <h2 data-splitting>Happy Reading Nerds <img class="emoji" src="img/Emoji/Nerd.png"></h2>
-            <p data-splitting>And let me know what you think in the comment, usually nerd’s critics are the best feedback</p>
-        </div>
-        <div class="articles-page">
-            <div class="each-article">
-                <a href="https://medium.com/@hafidyusuf/haft-the-ultimate-figma-landing-page-template-6b45d1752f71" target="_blank">
-                    <div class="article-img">
-                        <div class="border"></div>
-                        <img src="img/article/4.webp">
-                    </div>
-                    <div class="article-date" data-splitting>Sep 26, 2023</div>
-                    <div class="article-title" data-splitting>Haft: The Ultimate Figma Landing Page Template</div>
-                    <div class="article-desc" data-splitting>Haft, a game-changing Figma landing page template that brings your creative visions to life effortlessly, and it's FREE!</div>
-                </a>
+        <div class="container works-page-container">
+            <div class="headline headline-page">
+                <h2 data-splitting>Happy Reading Nerds <img class="emoji" src="img/Emoji/Nerd.png"></h2>
+                <p data-splitting>And let me know what you think in the comment, usually nerd’s critics are the best feedback</p>
             </div>
-            <div class="each-article">
-                <a href="https://medium.com/@hafidyusuf/the-secret-formula-for-successful-landing-page-website-e9917f611151" target="_blank">
-                    <div class="article-img">
-                        <div class="border"></div>
-                        <img src="img/article/2.webp">
-                    </div>
-                    <div class="article-date" data-splitting>20 Feb, 2022</div>
-                    <div class="article-title" data-splitting>The Secret Formula for successful Landing Page Website</div>
-                    <div class="article-desc" data-splitting>Most of the time… like almost every time, the main reason for a Landing Page is to Convert Visitors into Customers</div>
-                </a>
-            </div>
-            <div class="each-article">
-                <a href="https://medium.com/@hafidyusuf/working-in-a-product-company-is-way-more-fun-than-working-in-software-house-for-ux-designer-f838ed02623e" target="_blank">
-                    <div class="article-img">
-                        <div class="border"></div>
-                        <img src="img/article/3.webp">
-                    </div>
-                    <div class="article-date" data-splitting>Dec 13, 2022</div>
-                    <div class="article-title" data-splitting>Working in a product based company is way more fun than working in software house</div>
-                    <div class="article-desc" data-splitting>I’ve work in the software house as a UI/UX Designer for a couple years and move to fintech company that create a mobile app</div>
-                </a>
-            </div>
-            <div class="each-article">
-                <a href="https://medium.com/@hafidyusuf/how-we-make-fancy-website-like-every-winning-website-at-awwwards-com-169e640968e8" target="_blank">
-                    <div class="article-img">
-                        <div class="border"></div>
-                        <img src="img/article/1.gif">
-                    </div>
-                    <div class="article-date" data-splitting>May 1, 2021</div>
-                    <div class="article-title" data-splitting>How to make fancy website like every winning website at Awwwards.com</div>
-                    <div class="article-desc" data-splitting>Awwward.com always gave me motivation and inspiration to improve my website up a notch, but… basicaly i’m a designer</div>
-                </a>
+            <div class="articles-page">
+                <div class="each-article">
+                    <a href="https://medium.com/@hafidyusuf/haft-the-ultimate-figma-landing-page-template-6b45d1752f71" target="_blank">
+                        <div class="article-img">
+                            <div class="border"></div>
+                            <img src="img/article/4.webp">
+                        </div>
+                        <div class="article-date" data-splitting>Sep 26, 2023</div>
+                        <div class="article-title" data-splitting>Haft: The Ultimate Figma Landing Page Template</div>
+                        <div class="article-desc" data-splitting>Haft, a game-changing Figma landing page template that brings your creative visions to life effortlessly, and it's FREE!</div>
+                    </a>
+                </div>
+                <div class="each-article">
+                    <a href="https://medium.com/@hafidyusuf/the-secret-formula-for-successful-landing-page-website-e9917f611151" target="_blank">
+                        <div class="article-img">
+                            <div class="border"></div>
+                            <img src="img/article/2.webp">
+                        </div>
+                        <div class="article-date" data-splitting>20 Feb, 2022</div>
+                        <div class="article-title" data-splitting>The Secret Formula for successful Landing Page Website</div>
+                        <div class="article-desc" data-splitting>Most of the time… like almost every time, the main reason for a Landing Page is to Convert Visitors into Customers</div>
+                    </a>
+                </div>
+                <div class="each-article">
+                    <a href="https://medium.com/@hafidyusuf/working-in-a-product-company-is-way-more-fun-than-working-in-software-house-for-ux-designer-f838ed02623e" target="_blank">
+                        <div class="article-img">
+                            <div class="border"></div>
+                            <img src="img/article/3.webp">
+                        </div>
+                        <div class="article-date" data-splitting>Dec 13, 2022</div>
+                        <div class="article-title" data-splitting>Working in a product based company is way more fun than working in software house</div>
+                        <div class="article-desc" data-splitting>I’ve work in the software house as a UI/UX Designer for a couple years and move to fintech company that create a mobile app</div>
+                    </a>
+                </div>
+                <div class="each-article">
+                    <a href="https://medium.com/@hafidyusuf/how-we-make-fancy-website-like-every-winning-website-at-awwwards-com-169e640968e8" target="_blank">
+                        <div class="article-img">
+                            <div class="border"></div>
+                            <img src="img/article/1.gif">
+                        </div>
+                        <div class="article-date" data-splitting>May 1, 2021</div>
+                        <div class="article-title" data-splitting>How to make fancy website like every winning website at Awwwards.com</div>
+                        <div class="article-desc" data-splitting>Awwward.com always gave me motivation and inspiration to improve my website up a notch, but… basicaly i’m a designer</div>
+                    </a>
+                </div>
             </div>
         </div>
     </div>
@@ -164,7 +168,6 @@
         </div>
         <img class="closeit" src="img/close.svg">
     </div>
-</div>
 
     <!-- Every js that i got -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
@@ -175,6 +178,5 @@
     <script src="https://unpkg.com/splitting/dist/splitting.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@barba/core"></script>
     <script type="module" src="js/index.js"></script>
-    <script type="module" src="js/page/articles.js"></script>
 </body>
 </html>
