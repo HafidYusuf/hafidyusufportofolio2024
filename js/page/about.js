@@ -1,17 +1,11 @@
 // FIRST BUILD UP
+
+
+//$(document).ready(function(){
+//  aboutInit();
+//});
+
 /*
-$(document).ready(function(){
-    var abpic = $('.about-container spline-viewer');
-    var abtitle = $('.about-title .word');
-    var abdesc = $('.about-intro .word');
-    var abbg = $('.about-container');
-
-    TweenMax.from(abpic, 1, {y:100,scaleY:1.3,autoAlpha:0,ease:Power4.easeOut});
-    TweenMax.staggerFrom(abtitle, 1, {y:10,autoAlpha:0,ease:Power4.easeOut,delay:.5},.02);
-    TweenMax.staggerFrom(abdesc, 1, {y:10,autoAlpha:0,ease:Power4.easeOut,delay:1},.02);
-});
-*/
-
 //VALUES ON ABOUT PAGE
 gsap.set($(".value-title .char, .value-description .word"), {
     y: 60,
@@ -47,3 +41,4 @@ gsap.timeline({
 
 .staggerTo('.resume-container p .word', 0.5, {y: 0, autoAlpha:1},0.05)
 .to('.resume', 1, {y: 0, autoAlpha:1, delay: .2})
+*/
