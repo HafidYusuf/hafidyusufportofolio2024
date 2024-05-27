@@ -525,6 +525,27 @@ function resourcesAnimation(container){
             toggleActions: "restart none none reverse"
             },
         });
+        //SHIMMER SHIMMER ANIMATION
+        const target1 = document.getElementById('shimmerWave1');
+        const target2 = document.getElementById('shimmerWave2');
+        function splitTextToSpans(targetElement) {
+            if (targetElement) {
+                const text = targetElement.textContent;
+                targetElement.innerHTML = '';
+                for (let character of text) {
+                    const span = document.createElement('span');
+                    if (character === ' ') {
+                        span.innerHTML = '&nbsp;';
+                    } else {
+                        span.textContent = character;
+                    }
+                    targetElement.appendChild(span);
+                }
+            }
+        }
+        splitTextToSpans(target1);
+        splitTextToSpans(target2);
+    }
     }
 
     //SUBSCRIPTION ANIMATION
@@ -543,28 +564,6 @@ function resourcesAnimation(container){
     .to('.subscription', 1, {scaleX:1})
     .staggerTo('.subscription .subs-desc .word', 0.3, {y: 0, autoAlpha:1},0.05)
     .to('.subscription form', 1, {y: 0, autoAlpha:1})
-
-    //SHIMMER SHIMMER ANIMATION
-    const target1 = document.getElementById('shimmerWave1');
-    const target2 = document.getElementById('shimmerWave2');
-    function splitTextToSpans(targetElement) {
-        if (targetElement) {
-            const text = targetElement.textContent;
-            targetElement.innerHTML = '';
-            for (let character of text) {
-                const span = document.createElement('span');
-                if (character === ' ') {
-                    span.innerHTML = '&nbsp;';
-                } else {
-                    span.textContent = character;
-                }
-                targetElement.appendChild(span);
-            }
-        }
-    }
-    splitTextToSpans(target1);
-    splitTextToSpans(target2);
-}
 /* End of Resources Whole Animation */
 
 
@@ -646,6 +645,7 @@ barba.init({
             indexAnimationEnter(next.container);
             homeInit(next.container);
             homeAnimation(next.container);
+            resourcesAnimation(next.container);
             initSmoothScrolling();
         }
     },
