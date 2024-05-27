@@ -190,7 +190,7 @@ function detailInit(container) {
     .to(img, 1, {bottom:"0%",ease:Power4.easeOut,delay: 3})
     .staggerFrom(link, 1, {y:10,autoAlpha:0,ease:Power4.easeOut},.02)
     .from(icon, 1, {y:10,autoAlpha:0,ease:Power4.easeOut},"-=100%")
-    .staggerFrom(title, 1, {y:10,autoAlpha:0,ease:Power4.easeOut},.08)
+    .staggerFrom(title, 1, {y:10,autoAlpha:0,ease:Power4.easeOut},.08, 5)
     .staggerFrom(detail, 1, {y:10,autoAlpha:0,ease:Power4.easeOut},.08)
     .to(element, 1, {autoAlpha:1,ease:Power4.easeOut},"-=100%");
 }
@@ -590,6 +590,28 @@ function detailAnimation(container){
 /* End of Detail Whole Animation */
 
 
+/* Contact Whole Animation */
+function contactAnimation(container){
+    //FOOTER ANIMATION
+    gsap.set('.keepintouch a', {y: 10, autoAlpha: 0})
+    gsap.set('.contact h2 .char', {y: 10, autoAlpha:0})
+    gsap.set('.contact h2 .emoji', {y: 10, autoAlpha: 0})
+    gsap.set('.copyright', {scaleX: 0})
+    gsap.set('.copyright .left .char, .copyright .right .char, .copyright .right img', {y: 10, autoAlpha: 0})
+    gsap.set('.copyright .emoji', {y: 10, autoAlpha: 0})
+
+    gsap.timeline()
+
+    .staggerTo('.contact h2 .char, .contact h2 .emoji', 0.3, {y: 0, autoAlpha:1, delay: 9},0.1)
+    .staggerTo('.headline .char', 0.3, {y: 0, autoAlpha:1,},0.01)
+    .staggerTo('.keepintouch a', 0.5, {y: 0, autoAlpha:1},0.05)
+    .to('.copyright', {scaleX: 1})
+    .staggerTo('.copyright .left .char, .copyright .right .char, .copyright .emoji, .copyright .right img', 0.3, {y: 0, autoAlpha: 1},0.01)
+    .to('.copyright .emoji', 0.3, {"animation": "heartbeat 1.8s infinite"})
+}
+/* End of Contact Whole Animation */
+
+
 /* Kill ScrollTrigger (To Refresh Each Page Transition) */
 const cleanGSAP = () => {
 	ScrollTrigger.getAll().forEach( t => t.kill(false) )
@@ -736,6 +758,22 @@ barba.init({
             indexAnimationEnter(next.container);
             detailInit(next.container);
             detailAnimation(next.container);
+            initSmoothScrolling();
+        }
+    },
+    {
+        name: 'contact-tansition',//DETAIL WORK TRANSITION
+        to: {namespace: ['contact']},
+        leave: ({current}) => coverAnimationLeave(current.container),
+        enter({next}) {
+            cleanGSAP();
+            $(window).scrollTop(0);
+            coverAnimationEnter(next.container);
+            indexAnimationEnter(next.container);
+            initSmoothScrolling();
+        },
+        once({next}) {
+            indexAnimationEnter(next.container);
             initSmoothScrolling();
         }
     }]
