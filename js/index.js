@@ -79,7 +79,7 @@ const indexAnimationEnter = (container) => {
     gsap.set('.contact h2 .char', {y: 10, autoAlpha:0})
     gsap.set('.contact h2 .emoji', {y: 10, autoAlpha: 0})
     gsap.set('.copyright', {scaleX: 0})
-    gsap.set('.copyright .left .char', {y: 10, autoAlpha: 0})
+    gsap.set('.copyright .left .char, .copyright .right .char, .copyright .right img', {y: 10, autoAlpha: 0})
     gsap.set('.copyright .emoji', {y: 10, autoAlpha: 0})
 
     gsap.timeline({
@@ -94,7 +94,7 @@ const indexAnimationEnter = (container) => {
     .staggerTo('.keepintouch a', 0.5, {y: 0, autoAlpha:1, delay: .5},0.05)
     .staggerTo('.contact h2 .char, .contact h2 .emoji', 0.3, {y: 0, autoAlpha:1,},0.01)
     .to('.copyright', {scaleX: 1})
-    .staggerTo('.copyright .left .char, .copyright .emoji', 0.3, {y: 0, autoAlpha: 1},0.01)
+    .staggerTo('.copyright .left .char, .copyright .right .char, .copyright .emoji, .copyright .right img', 0.3, {y: 0, autoAlpha: 1},0.01)
     .to('.copyright .emoji', 0.3, {"animation": "heartbeat 1.8s infinite"})
 
     //ADD A GRADIENT BACKGROUND WHEN FOOTER TOUCH THE GROUND
@@ -290,8 +290,8 @@ function homeAnimation(container){
             toggleActions: "restart none none reverse"
         }
     })
-    .to('.quotes-container', 1, {scaleX: 1, opacity: 1})
-    .to('.quotes .splitting .char', 1, {immediateRender: false, y: 0, opacity: 1, stagger: 0.02})
+    .to('.quotes-container', .5, {scaleX: 1, opacity: 1})
+    .to('.quotes .splitting .char', 1, {immediateRender: false, y: 0, opacity: 1, stagger: 0.015})
 
     //EXPERIENCE CHANGES ON MOBILE (FROM HOVER TO TAP)
     var mobile = (/iphone|ipod|ipad|android|blackberry|mini|windows\sce|palm/i.test(navigator.userAgent.toLowerCase()));  
@@ -320,7 +320,7 @@ function homeAnimation(container){
         immediateRender: false,
         y: 0,
         opacity: 1,
-        stagger: 0.15,
+        stagger: 0.08,
         scrollTrigger: {
         trigger: ".clients",
         start: "top bottom-=100px",
@@ -498,20 +498,9 @@ function resourcesAnimation(container){
         opacity: 0
     });
 
-    gsap.delayedCall(3, batchu)
-    
-    gsap.from($(".resources div"), 1, {
-        autoAlpha: 0,
-        delay: 3,
-        scrollTrigger: {
-        trigger: ".resources",
-        start: "top center",
-        end: "bottom top",
-        toggleActions: "restart none none reverse"
-        },
-    });
+    gsap.delayedCall(3, batchz)
 
-    function batchu() {
+    function batchz() {
         gsap.to($(".resources spline-viewer"), 3, {
             immediateRender: false,
             scale: 1,
@@ -545,25 +534,26 @@ function resourcesAnimation(container){
         }
         splitTextToSpans(target1);
         splitTextToSpans(target2);
-    }
+
+        //SUBSCRIPTION ANIMATION
+        gsap.set('.subscription', {scaleX:0})
+        gsap.set('.subscription .subs-desc .word', {y: 10, autoAlpha:0})
+        gsap.set('.subscription form', {y: 10, autoAlpha:0})
+    
+        gsap.timeline({
+            scrollTrigger:{
+            trigger:'.subscription',
+            start: "top bottom-=100px",
+            toggleActions: "restart none none reverse",
+            ease: Power4.easeOut
+            }
+        })
+        .to('.subscription', 1, {scaleX:1})
+        .staggerTo('.subscription .subs-desc .word', 0.3, {y: 0, autoAlpha:1},0.05)
+        .to('.subscription form', 1, {y: 0, autoAlpha:1})
     }
 
-    //SUBSCRIPTION ANIMATION
-    gsap.set('.subscription', {scaleX:0})
-    gsap.set('.subscription .subs-desc .word', {y: 10, autoAlpha:0})
-    gsap.set('.subscription form', {y: 10, autoAlpha:0})
-
-    gsap.timeline({
-        scrollTrigger:{
-        trigger:'.subscription',
-        start: "top bottom-=100px",
-        toggleActions: "restart none none reverse",
-        ease: Power4.easeOut
-        }
-    })
-    .to('.subscription', 1, {scaleX:1})
-    .staggerTo('.subscription .subs-desc .word', 0.3, {y: 0, autoAlpha:1},0.05)
-    .to('.subscription form', 1, {y: 0, autoAlpha:1})
+}
 /* End of Resources Whole Animation */
 
 

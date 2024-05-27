@@ -968,13 +968,19 @@ a.underline:hover::after {
   border-top: solid 1px rgba(255, 255, 255, 0.2);
   margin-top: 40px;
   display: flex;
-  justify-content: space-between;
   padding-top: 20px;
+  align-items: center;
 }
 .copyright .right {
   margin-top: -5px;
+  text-align: right;
+  flex: 1 0 0;
 }
-.copyright .right a:hover {
+.copyright .right img {
+  margin-bottom: -2px;
+}
+.copyright .right a .char {
+  font-weight: 600;
   text-decoration: underline;
 }
 

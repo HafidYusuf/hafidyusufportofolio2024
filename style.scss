@@ -945,14 +945,20 @@ a.underline {
     border-top: solid 1px rgba(255, 255, 255, 0.2);
     margin-top: 40px;
     display: flex;
-    justify-content: space-between;
     padding-top: 20px;
-
+    align-items: center;
     .right {
         margin-top: -5px;
-
-        a:hover {
-            text-decoration: underline;
+        text-align: right;
+        flex: 1 0 0;
+        img {
+            margin-bottom: -2px;
+        }
+        a{
+            .char {
+                font-weight: 600;
+                text-decoration: underline;
+            }
         }
     }
 }
