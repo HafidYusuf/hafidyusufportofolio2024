@@ -633,6 +633,7 @@ barba.init({
             indexAnimationEnter(next.container);
             homeInit(next.container);
             homeAnimation(next.container);
+            worksAnimation(next.container);
             resourcesAnimation(next.container);
             initSmoothScrolling();
         },
@@ -640,6 +641,7 @@ barba.init({
             indexAnimationEnter(next.container);
             homeInit(next.container);
             homeAnimation(next.container);
+            worksAnimation(next.container);
             resourcesAnimation(next.container);
             initSmoothScrolling();
         }

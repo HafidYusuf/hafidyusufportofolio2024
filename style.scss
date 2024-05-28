@@ -1764,6 +1764,11 @@ a.underline {
     }
 }
 
+@media screen and (min-width:720px) {
+    .index-works-page-container{
+        display: none;
+    }
+}
 @media screen and (max-width:720px) {
     p {
         font-size: 11pt;
@@ -1822,6 +1827,10 @@ a.underline {
 
     .headline h2 .char {
         font-size: 18pt;
+    }
+    .works-container {
+        visibility: hidden;
+        display: none;
     }
 
     .grid__item {
