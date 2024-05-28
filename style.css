@@ -492,8 +492,7 @@ nav .menu .nav-link:hover::after {
   opacity: 0.7;
 }
 .article .article-title {
-  font-family: Montaigne-bold;
-  font-size: 19pt;
+  font-size: 18pt;
   margin-bottom: 10px;
 }
 .article .article-desc {
@@ -1509,7 +1508,6 @@ a.underline:hover::after {
   height: 400px;
   overflow: hidden;
   position: relative;
-  border-radius: 10px;
 }
 .each-work .work-img img {
   width: 100%;
@@ -1690,11 +1688,6 @@ a.underline:hover::after {
   .max-w-80 {
     padding: 50px 8%;
     display: block;
-  }
-}
-@media screen and (min-width: 720px) {
-  .index-works-page-container {
-    display: none;
   }
 }
 @media screen and (max-width: 720px) {
@@ -1947,6 +1940,26 @@ a.underline:hover::after {
   font-family: "Times New Roman", Times, serif;
 }
 .cover-transition h2 .char {
+  opacity: 0;
+  font-family: Montaigne-bold;
+}
+
+.cover-transition-load {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #151515;
+  z-index: 999999999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.cover-transition-load h2 span .char {
+  font-family: "Times New Roman", Times, serif;
+}
+.cover-transition-load h2 .char {
   opacity: 0;
   font-family: Montaigne-bold;
 }/*# sourceMappingURL=style.css.map */

@@ -82,7 +82,7 @@ const indexAnimationEnter = (container) => {
     gsap.set('.copyright .left .char, .copyright .right .char, .copyright .right img', {y: 10, autoAlpha: 0})
     gsap.set('.copyright .emoji', {y: 10, autoAlpha: 0})
 
-    gsap.timeline({
+    let tl = gsap.timeline({
         scrollTrigger:{
         trigger:'.keepintouch',
         start: "top bottom-=100px",
@@ -91,6 +91,7 @@ const indexAnimationEnter = (container) => {
         }
     })
 
+    tl
     .staggerTo('.keepintouch a', 0.5, {y: 0, autoAlpha:1, delay: .5},0.05)
     .staggerTo('.contact h2 .char, .contact h2 .emoji', 0.3, {y: 0, autoAlpha:1,},0.01)
     .to('.copyright', {scaleX: 1})
@@ -121,6 +122,7 @@ const coverAnimationLeave = () => {
 }
 const coverAnimationEnter = () => {
     Splitting();
+    gsap.set($(".cover-transition-load"), {height: "0", top: 0, autoAlpha: 0});
     gsap.set($(".cover-transition h2 .char"), {y:10, autoAlpha:0});
     gsap.set($(".cover-transition"), {height: "100%", bottom: "auto", top: 0});
 
@@ -132,6 +134,20 @@ const coverAnimationEnter = () => {
     .set($(".cover-transition"), {height: "0%", bottom: 0, top: "auto"})
 }
 /* End of Page Transition Cover */
+
+
+/* Preloader Animation */
+const coverAnimationLoad = () => {
+    Splitting();
+    gsap.set($(".cover-transition-load"), {height: "100%", top: 0});
+    gsap.set($(".cover-transition-load h2 .char"), {y: 0, autoAlpha:1, opacity:1});
+
+    var tl = gsap.timeline();
+    return tl
+    .staggerTo($(".cover-transition-load h2 .char"), .5, {y: -10, autoAlpha:0, delay:.5}, 0.03)
+    .to($(".cover-transition-load"), {duration: 1, height: 0, ease: "Expo.easeInOut",})
+}
+/* End of Preloader Animation */
 
 
 /* Homepage First Build Up Animation */
@@ -199,6 +215,29 @@ function detailInit(container) {
 
 /* Homepage Whole Animation */
 function homeAnimation(container){
+
+    //INFINITE LOOP CLIENTS
+    gsap.set(".left-scroll", {xPercent: 0});
+    gsap.to(".left-scroll", {xPercent: -50, duration: 15, ease: Linear.easeNone, repeat: -1});
+
+    gsap.set($(".client"), {
+        y: 60,
+        opacity: 0
+    });
+
+    gsap.to($(".client"), {
+        immediateRender: false,
+        y: 0,
+        opacity: 1,
+        stagger: 0.08,
+        scrollTrigger: {
+        trigger: ".clients",
+        start: "top bottom-=100px",
+        end: "bottom top",
+        toggleActions: "restart none none reverse"
+        },
+    });
+    /*
     preloadImages();
     //GRID EFFECT
     let lenis;
@@ -282,28 +321,6 @@ function homeAnimation(container){
         });
     }
 
-    //INFINITE LOOP CLIENTS
-    gsap.set(".left-scroll", {xPercent: 0});
-    gsap.to(".left-scroll", {xPercent: -50, duration: 15, ease: Linear.easeNone, repeat: -1});
-
-    gsap.set($(".client"), {
-        y: 60,
-        opacity: 0
-    });
-
-    gsap.to($(".client"), {
-        immediateRender: false,
-        y: 0,
-        opacity: 1,
-        stagger: 0.08,
-        scrollTrigger: {
-        trigger: ".clients",
-        start: "top bottom-=100px",
-        end: "bottom top",
-        toggleActions: "restart none none reverse"
-        },
-    });
-
     //ARTICLE SHOWS
     gsap.set($(".article"), {
         y: 60,
@@ -322,6 +339,8 @@ function homeAnimation(container){
         toggleActions: "restart none none reverse"
         },
     });
+    */
+
 }
 /* End of Homepage Whole Animation */
 
@@ -423,7 +442,7 @@ function worksAnimation(container){
             start: 'top bottom-=100px',
             onEnter: batch => {
                 batch.forEach((card, index) => {
-        
+
                     let img = card.querySelectorAll('.work-img img');
                     let content = card.querySelectorAll('.work-title .word, .work-tags .word, .work-link .char, .work-link img');
                     let chart_tl = gsap.timeline();
@@ -575,22 +594,82 @@ function detailAnimation(container){
 
 /* Contact Whole Animation */
 function contactAnimation(container){
-    //FOOTER ANIMATION
+    Splitting();
+
+    //NAVBAR
+    var nav = $('nav a');
+    var burger = $(".menu-toggle");
+
+    TweenMax.staggerFrom(nav, 2, {y:-20,autoAlpha:0,ease:Power4.easeOut,delay:2},.1);
+    TweenMax.from(burger, 1, {y:-20,autoAlpha:0,ease:Power4.easeOut,delay:2.5});
+
+    //ADDING GRADIENT TO THE NAVBAR
+    $(window).scroll(function() {
+        if ($(this).scrollTop() > 300){
+            $('nav').addClass("nav-bg-scroll");
+        }
+        else{
+            $('nav').removeClass("nav-bg-scroll");
+        }
+    });
+
+    //HEADLINE EACH SECTIONS
+    gsap.set(".headline .word, .headline .emoji", {
+        y: 10,
+        autoAlpha: 0,
+    }) 
+
+    //FOOTER SET
     gsap.set('.keepintouch a', {y: 10, autoAlpha: 0})
+    gsap.set('.headlining h2 .char', {y: 10, autoAlpha: 0})
     gsap.set('.contact h2 .char', {y: 10, autoAlpha:0})
     gsap.set('.contact h2 .emoji', {y: 10, autoAlpha: 0})
     gsap.set('.copyright', {scaleX: 0})
     gsap.set('.copyright .left .char, .copyright .right .char, .copyright .right img', {y: 10, autoAlpha: 0})
     gsap.set('.copyright .emoji', {y: 10, autoAlpha: 0})
 
-    gsap.timeline()
+    gsap.delayedCall(3, batchy)
 
-    .staggerTo('.contact h2 .char, .contact h2 .emoji', 0.3, {y: 0, autoAlpha:1, delay: 9},0.1)
-    .staggerTo('.headline .char', 0.3, {y: 0, autoAlpha:1,},0.01)
-    .staggerTo('.keepintouch a', 0.5, {y: 0, autoAlpha:1},0.05)
-    .to('.copyright', {scaleX: 1})
-    .staggerTo('.copyright .left .char, .copyright .right .char, .copyright .emoji, .copyright .right img', 0.3, {y: 0, autoAlpha: 1},0.01)
-    .to('.copyright .emoji', 0.3, {"animation": "heartbeat 1.8s infinite"})
+    function batchy (){
+        ScrollTrigger.batch(".headline .word, .headline .emoji", {
+            start: "top bottom-=100px",
+            onEnter: (batch) =>
+            TweenMax.staggerTo(batch, 1, {
+                y: 0,
+                autoAlpha: 1,
+                ease: Power4.easeOut
+            }, .03),
+            onLeaveBack: (batch) =>
+            gsap.to(batch, 1, {
+                y: 10,
+                autoAlpha: 0,
+                ease: Power4.easeOut
+            })
+        });
+
+        gsap.timeline({
+            delay: 1
+        })
+
+        .staggerTo('.contact h2 .char, .contact h2 .emoji', 0.3, {y: 0, autoAlpha:1},0.01)
+        .staggerTo('.headlining h2 .char', 0.3, {y: 0, autoAlpha:1,},0.01)
+        .staggerTo('.keepintouch a', 0.5, {y: 0, autoAlpha:1},0.05)
+        .to('.copyright', {scaleX: 1})
+        .staggerTo('.copyright .left .char, .copyright .right .char, .copyright .emoji, .copyright .right img', 0.3, {y: 0, autoAlpha: 1},0.01)
+        .to('.copyright .emoji', 0.3, {"animation": "heartbeat 1.8s infinite"})
+        .to('.footer', 0.3, {onComplete: function(){
+            TweenMax.set('.footer', {className:"footer footer-gradient"})
+        }})
+
+    }
+
+    //NAV FUNCTION FOR MOBILE
+    $('.menu-toggle').click(function () {
+        $('.ham-menu').addClass('visible');
+    });
+    $('.closeit').click(function () {
+        $('.ham-menu').removeClass('visible');
+    });
 }
 /* End of Contact Whole Animation */
 
@@ -611,8 +690,8 @@ barba.init({
         name: 'transition',//GENERAL TRANSITION
         leave: ({current}) => coverAnimationLeave(current.container),
         enter({next}) {
-            cleanGSAP();
             $(window).scrollTop(0);
+            cleanGSAP();
             coverAnimationEnter(next.container);
             indexAnimationEnter(next.container);
             initSmoothScrolling();
@@ -627,8 +706,8 @@ barba.init({
         to: {namespace: ['home']},
         leave: ({current}) => coverAnimationLeave(current.container),
         enter({next}) {
-            cleanGSAP();
             $(window).scrollTop(0);
+            cleanGSAP();
             coverAnimationEnter(next.container);
             indexAnimationEnter(next.container);
             homeInit(next.container);
@@ -638,6 +717,7 @@ barba.init({
             initSmoothScrolling();
         },
         once({next}) {
+            coverAnimationLoad(next.container);
             indexAnimationEnter(next.container);
             homeInit(next.container);
             homeAnimation(next.container);
@@ -651,8 +731,8 @@ barba.init({
         to: {namespace: ['about']},
         leave: ({current}) => coverAnimationLeave(current.container),
         enter({next}) {
-            cleanGSAP();
             $(window).scrollTop(0);
+            cleanGSAP();
             coverAnimationEnter(next.container);
             indexAnimationEnter(next.container);
             aboutInit(next.container);
@@ -660,6 +740,7 @@ barba.init({
             initSmoothScrolling();
         },
         once({next}) {
+            coverAnimationLoad(next.container);
             indexAnimationEnter(next.container);
             aboutInit(next.container);
             aboutAnimation(next.container);
@@ -671,8 +752,8 @@ barba.init({
         to: {namespace: ['articles']},
         leave: ({current}) => coverAnimationLeave(current.container),
         enter({next}) {
-            cleanGSAP();
             $(window).scrollTop(0);
+            cleanGSAP();
             coverAnimationEnter(next.container);
             indexAnimationEnter(next.container);
             radialBackgroundInit(next.container);
@@ -680,6 +761,7 @@ barba.init({
             initSmoothScrolling();
         },
         once({next}) {
+            coverAnimationLoad(next.container);
             indexAnimationEnter(next.container);
             radialBackgroundInit(next.container);
             articlesAnimation(next.container);
@@ -691,8 +773,8 @@ barba.init({
         to: {namespace: ['works']},
         leave: ({current}) => coverAnimationLeave(current.container),
         enter({next}) {
-            cleanGSAP();
             $(window).scrollTop(0);
+            cleanGSAP();
             coverAnimationEnter(next.container);
             indexAnimationEnter(next.container);
             radialBackgroundInit(next.container);
@@ -700,6 +782,7 @@ barba.init({
             initSmoothScrolling();
         },
         once({next}) {
+            coverAnimationLoad(next.container);
             indexAnimationEnter(next.container);
             radialBackgroundInit(next.container);
             worksAnimation(next.container);
@@ -711,8 +794,8 @@ barba.init({
         to: {namespace: ['resources']},
         leave: ({current}) => coverAnimationLeave(current.container),
         enter({next}) {
-            cleanGSAP();
             $(window).scrollTop(0);
+            cleanGSAP();
             coverAnimationEnter(next.container);
             indexAnimationEnter(next.container);
             radialBackgroundInit(next.container);
@@ -720,6 +803,7 @@ barba.init({
             initSmoothScrolling();
         },
         once({next}) {
+            coverAnimationLoad(next.container);
             indexAnimationEnter(next.container);
             radialBackgroundInit(next.container);
             resourcesAnimation(next.container);
@@ -731,8 +815,8 @@ barba.init({
         to: {namespace: ['detail']},
         leave: ({current}) => coverAnimationLeave(current.container),
         enter({next}) {
-            cleanGSAP();
             $(window).scrollTop(0);
+            cleanGSAP();
             coverAnimationEnter(next.container);
             indexAnimationEnter(next.container);
             detailInit(next.container);
@@ -740,6 +824,7 @@ barba.init({
             initSmoothScrolling();
         },
         once({next}) {
+            coverAnimationLoad(next.container);
             indexAnimationEnter(next.container);
             detailInit(next.container);
             detailAnimation(next.container);
@@ -747,18 +832,19 @@ barba.init({
         }
     },
     {
-        name: 'contact-tansition',//DETAIL WORK TRANSITION
+        name: 'contact-tansition',//CONTACT TRANSITION
         to: {namespace: ['contact']},
         leave: ({current}) => coverAnimationLeave(current.container),
         enter({next}) {
-            cleanGSAP();
             $(window).scrollTop(0);
+            cleanGSAP();
             coverAnimationEnter(next.container);
-            indexAnimationEnter(next.container);
+            contactAnimation(next.container);
             initSmoothScrolling();
         },
         once({next}) {
-            indexAnimationEnter(next.container);
+            coverAnimationLoad(next.container);
+            contactAnimation(next.container);
             initSmoothScrolling();
         }
     }]
