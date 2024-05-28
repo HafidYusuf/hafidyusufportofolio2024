@@ -28,7 +28,7 @@ const indexAnimationEnter = (container) => {
     var burger = $(".menu-toggle");
 
     TweenMax.staggerFrom(nav, 2, {y:-20,autoAlpha:0,ease:Power4.easeOut,delay:2},.1);
-    TweenMax.from(burger, 1, {y:-20,autoAlpha:0,ease:Power4.easeOut,delay:2.5},.1);
+    TweenMax.from(burger, 1, {y:-20,autoAlpha:0,ease:Power4.easeOut,delay:2.5});
 
     //ADDING GRADIENT TO THE NAVBAR
     $(window).scroll(function() {
@@ -253,31 +253,6 @@ function homeAnimation(container){
         scroll();
     });
 
-    //CHANGE BACKGROUND COLOR ON SCROLL
-    gsap.to("body", {
-        "background-color": "#2C58F1",
-        immediateRender: false,
-        scrollTrigger: {
-        trigger: ".clients-container",
-        start: "top center",
-        endTrigger: ".article-container",
-        end: "top top",
-        toggleActions: "restart reverse restart reverse"
-        },
-    });
-    //Gradient color change as the background color changes
-    gsap.to(".gradient-cover, .gradient-cover-article", {
-        "background-color": "#2C58F1",
-        immediateRender: false,
-        scrollTrigger: {
-        trigger: ".clients-container",
-        start: "top center",
-        endTrigger: ".article-container",
-        end: "top top",
-        toggleActions: "restart reverse restart reverse"
-        },
-    });
-
     //QUOTES ANIMATION
     gsap.set($(".quotes .splitting .char"), {y: 10, opacity: 0});
     gsap.set($(".quotes-container"), {scaleX: 0, opacity: 0});
@@ -497,6 +472,10 @@ function resourcesAnimation(container){
         scale: 0.3,
         opacity: 0
     });
+    gsap.set($(".resources-caption h2, .resources-caption p"), {
+        y: 10,
+        opacity: 0
+    });
 
     gsap.delayedCall(3, batchz)
 
@@ -514,6 +493,10 @@ function resourcesAnimation(container){
             toggleActions: "restart none none reverse"
             },
         });
+        gsap.to($(".resources-caption h2, .resources-caption p"), 1, {
+            y: 0,
+            opacity: 1
+        })
         //SHIMMER SHIMMER ANIMATION
         const target1 = document.getElementById('shimmerWave1');
         const target2 = document.getElementById('shimmerWave2');
