@@ -1,5 +1,3 @@
-import { preloadImages } from './utils.js';
-
 /* Smooth Scroll */
 let lenis;
 
@@ -674,6 +672,14 @@ function contactAnimation(container){
 /* End of Contact Whole Animation */
 
 
+function footerRemover(container){
+    $('#contact').css("display","none")
+}
+function footerEnabler(container){
+    $('#contact').css("display","block")
+}
+
+
 /* Kill ScrollTrigger (To Refresh Each Page Transition) */
 const cleanGSAP = () => {
 	ScrollTrigger.getAll().forEach( t => t.kill(false) )
@@ -685,7 +691,6 @@ const cleanGSAP = () => {
 
 /* BARBA Init */
 barba.init({
-    debug: true,
     transitions: [{
         name: 'transition',//GENERAL TRANSITION
         leave: ({current}) => coverAnimationLeave(current.container),
@@ -694,10 +699,12 @@ barba.init({
             cleanGSAP();
             coverAnimationEnter(next.container);
             indexAnimationEnter(next.container);
+            footerEnabler(next.container);
             initSmoothScrolling();
         },
         once({next}) {
             indexAnimationEnter(next.container);
+            footerEnabler(next.container);
             initSmoothScrolling();
         }
     },
@@ -714,6 +721,7 @@ barba.init({
             homeAnimation(next.container);
             worksAnimation(next.container);
             resourcesAnimation(next.container);
+            footerEnabler(next.container);
             initSmoothScrolling();
         },
         once({next}) {
@@ -723,6 +731,7 @@ barba.init({
             homeAnimation(next.container);
             worksAnimation(next.container);
             resourcesAnimation(next.container);
+            footerEnabler(next.container);
             initSmoothScrolling();
         }
     },
@@ -737,6 +746,7 @@ barba.init({
             indexAnimationEnter(next.container);
             aboutInit(next.container);
             aboutAnimation(next.container);
+            footerEnabler(next.container);
             initSmoothScrolling();
         },
         once({next}) {
@@ -744,6 +754,7 @@ barba.init({
             indexAnimationEnter(next.container);
             aboutInit(next.container);
             aboutAnimation(next.container);
+            footerEnabler(next.container);
             initSmoothScrolling();
         }
     },
@@ -758,6 +769,7 @@ barba.init({
             indexAnimationEnter(next.container);
             radialBackgroundInit(next.container);
             articlesAnimation(next.container);
+            footerEnabler(next.container);
             initSmoothScrolling();
         },
         once({next}) {
@@ -765,6 +777,7 @@ barba.init({
             indexAnimationEnter(next.container);
             radialBackgroundInit(next.container);
             articlesAnimation(next.container);
+            footerEnabler(next.container);
             initSmoothScrolling();
         }
     },
@@ -779,6 +792,7 @@ barba.init({
             indexAnimationEnter(next.container);
             radialBackgroundInit(next.container);
             worksAnimation(next.container);
+            footerEnabler(next.container);
             initSmoothScrolling();
         },
         once({next}) {
@@ -786,6 +800,7 @@ barba.init({
             indexAnimationEnter(next.container);
             radialBackgroundInit(next.container);
             worksAnimation(next.container);
+            footerEnabler(next.container);
             initSmoothScrolling();
         }
     },
@@ -800,6 +815,7 @@ barba.init({
             indexAnimationEnter(next.container);
             radialBackgroundInit(next.container);
             resourcesAnimation(next.container);
+            footerEnabler(next.container);
             initSmoothScrolling();
         },
         once({next}) {
@@ -807,6 +823,7 @@ barba.init({
             indexAnimationEnter(next.container);
             radialBackgroundInit(next.container);
             resourcesAnimation(next.container);
+            footerEnabler(next.container);
             initSmoothScrolling();
         }
     },
@@ -821,6 +838,7 @@ barba.init({
             indexAnimationEnter(next.container);
             detailInit(next.container);
             detailAnimation(next.container);
+            footerEnabler(next.container);
             initSmoothScrolling();
         },
         once({next}) {
@@ -828,6 +846,7 @@ barba.init({
             indexAnimationEnter(next.container);
             detailInit(next.container);
             detailAnimation(next.container);
+            footerEnabler(next.container);
             initSmoothScrolling();
         }
     },
@@ -840,11 +859,13 @@ barba.init({
             cleanGSAP();
             coverAnimationEnter(next.container);
             contactAnimation(next.container);
+            footerRemover(next.container);
             initSmoothScrolling();
         },
         once({next}) {
             coverAnimationLoad(next.container);
             contactAnimation(next.container);
+            footerRemover(next.container);
             initSmoothScrolling();
         }
     }]
