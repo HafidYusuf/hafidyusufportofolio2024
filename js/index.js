@@ -1,24 +1,23 @@
-/* Smooth Scroll */
-let lenis;
-
-// Function to initialize Lenis for smooth scrolling
-const initSmoothScrolling = () => {
-    lenis = new Lenis({
-        lerp: .2, // Lower values create a smoother scroll effect
-        smoothWheel: true // Enables smooth scrolling for mouse wheel events
-    });
-    lenis.on('scroll', () => ScrollTrigger.update());
-    const scrollFn = (time) => {
-        lenis.raf(time); // Run Lenis' requestAnimationFrame method
-        requestAnimationFrame(scrollFn); // Recursively call scrollFn on each frame
-    };
-    requestAnimationFrame(scrollFn);
-};
-/* End of Smooth Scroll */
-
-
 /* General Animation State */
 const indexAnimationEnter = (container) => {
+    //SMOOTH SCROLL
+    let lenis;
+
+    // Function to initialize Lenis for smooth scrolling
+    const initSmoothScrolling = () => {
+        lenis = new Lenis({
+            lerp: .2, // Lower values create a smoother scroll effect
+            smoothWheel: true // Enables smooth scrolling for mouse wheel events
+        });
+        lenis.on('scroll', () => ScrollTrigger.update());
+        const scrollFn = (time) => {
+            lenis.raf(time); // Run Lenis' requestAnimationFrame method
+            requestAnimationFrame(scrollFn); // Recursively call scrollFn on each frame
+        };
+        requestAnimationFrame(scrollFn);
+    };
+
+    initSmoothScrolling();
     Splitting();
 
     //NAVBAR
@@ -39,7 +38,7 @@ const indexAnimationEnter = (container) => {
     });
 
     //HEADLINE EACH SECTIONS
-    gsap.set(".headline .word, .headline .emoji", {
+    gsap.set(".headline h2, .headline p", {
         y: 10,
         autoAlpha: 0,
     }) 
@@ -47,14 +46,14 @@ const indexAnimationEnter = (container) => {
     gsap.delayedCall(3, batchy)
 
     function batchy (){
-        ScrollTrigger.batch(".headline .word, .headline .emoji", {
+        ScrollTrigger.batch(".headline h2, .headline p", {
             start: "top bottom-=100px",
             onEnter: (batch) =>
             TweenMax.staggerTo(batch, 1, {
                 y: 0,
                 autoAlpha: 1,
                 ease: Power4.easeOut
-            }, .03),
+            }, .5),
             onLeaveBack: (batch) =>
             gsap.to(batch, 1, {
                 y: 10,
@@ -77,7 +76,7 @@ const indexAnimationEnter = (container) => {
     gsap.set('.contact h2 .char', {y: 10, autoAlpha:0})
     gsap.set('.contact h2 .emoji', {y: 10, autoAlpha: 0})
     gsap.set('.copyright', {scaleX: 0})
-    gsap.set('.copyright .left .char, .copyright .right .char, .copyright .right img', {y: 10, autoAlpha: 0})
+    gsap.set('.copyright .left, .copyright .right, .copyright .right img', {y: 10, autoAlpha: 0})
     gsap.set('.copyright .emoji', {y: 10, autoAlpha: 0})
 
     let tl = gsap.timeline({
@@ -93,7 +92,7 @@ const indexAnimationEnter = (container) => {
     .staggerTo('.keepintouch a', 0.5, {y: 0, autoAlpha:1, delay: .5},0.05)
     .staggerTo('.contact h2 .char, .contact h2 .emoji', 0.3, {y: 0, autoAlpha:1,},0.01)
     .to('.copyright', {scaleX: 1})
-    .staggerTo('.copyright .left .char, .copyright .right .char, .copyright .emoji, .copyright .right img', 0.3, {y: 0, autoAlpha: 1},0.01)
+    .staggerTo('.copyright .left, .copyright .right, .copyright .emoji, .copyright .right img', 0.3, {y: 0, autoAlpha: 1},0.01)
     .to('.copyright .emoji', 0.3, {"animation": "heartbeat 1.8s infinite"})
 
     //ADD A GRADIENT BACKGROUND WHEN FOOTER TOUCH THE GROUND
@@ -157,7 +156,7 @@ function homeInit(container) {
     var intro = $(".intro .splitting .word");
 
     TweenMax.from(coins, 2, {autoAlpha:0, delay: 2});
-    TweenMax.staggerFrom(name, 2, {y:10,autoAlpha:0,ease:Power4.easeOut,delay:4},.08);
+    TweenMax.staggerFrom(name, 2, {y:10,autoAlpha:0,ease:Power4.easeOut,delay:4},.03);
     TweenMax.from(divider, {height:0,autoAlpha:0,ease:Power4.easeOut,delay:4.5});
     TweenMax.staggerFrom(intro, 2, {y:10,autoAlpha:0,ease:Power4.easeOut,delay:5},.03);
 }
@@ -347,26 +346,27 @@ function homeAnimation(container){
 function aboutAnimation(container){
 
     //VALUES ON ABOUT PAGE
-    gsap.set(container.querySelectorAll(".value-title .char, .value-description .word"), {
+    gsap.set(container.querySelectorAll(".value-title, .value-description"), {
         y: 60,
         opacity: 0
     });
 
-    TweenMax.to(container.querySelectorAll(".value-title .char, .value-description .word"), {
+    TweenMax.to(container.querySelectorAll(".value-title, .value-description"), 1, {
         immediateRender: false,
         y: 0,
         opacity: 1,
-        stagger: 0.008,
+        stagger: 0.1,
+
         scrollTrigger: {
-        trigger: ".values",
-        start: "top bottom-=100px",
-        end: "bottom top",
-        toggleActions: "restart none none reverse"
+            trigger: ".values",
+            start: "top bottom-=100px",
+            end: "bottom top",
+            toggleActions: "restart none none reverse"
         },
     });
 
     //DOWNLOAD CV BUTTON
-    gsap.set(container.querySelectorAll('.resume-container p .word'), {y: 10, autoAlpha: 0})
+    gsap.set(container.querySelectorAll('.resume-container p'), {y: 10, autoAlpha: 0})
     gsap.set(container.querySelectorAll('.resume'), {y: 10, autoAlpha: 0})
 
     gsap.timeline({
@@ -378,7 +378,7 @@ function aboutAnimation(container){
         }
     })
 
-    .staggerTo(container.querySelectorAll('.resume-container p .word'), 0.5, {y: 0, autoAlpha:1},0.05)
+    .staggerTo(container.querySelectorAll('.resume-container p'), 0.5, {y: 0, autoAlpha:1},0.05)
     .to(container.querySelectorAll('.resume'), 1, {y: 0, autoAlpha:1, delay: .2})
 }
 /* End of About Whole Animation */
@@ -387,7 +387,7 @@ function aboutAnimation(container){
 /* Articles Whole Animation */
 function articlesAnimation(container){
 
-    gsap.set('.article-img img, .article-date .word, .article-title .word, .article-desc .word', {y: 10, autoAlpha:0})
+    gsap.set('.article-img img, .article-date, .article-title, .article-desc', {y: 10, autoAlpha:0})
     gsap.set('.article-img .border', {"background": "linear-gradient(to bottom, #fff 0%, #000 0%, #000 100%, #5177FF 100%)", autoAlpha:0})
     
     gsap.delayedCall(3, batcho)
@@ -399,22 +399,22 @@ function articlesAnimation(container){
             batch.forEach((card, index) => {
         
                 let border = card.querySelectorAll('.article-img .border');
-                let content = card.querySelectorAll('.article-img img, .article-date .word, .article-title .word, .article-desc .word, .article-img img');
+                let content = card.querySelectorAll('.article-img img, .article-date, .article-title, .article-desc, .article-img img');
                 let chart_tl = gsap.timeline();
         
                 chart_tl.to( content, 0.6, {
                     y: 0,
                     autoAlpha: 1,
-                    stagger: 0.03,
-                    delay: index * 0.2,
+                    stagger: 0.1,
+                    delay: index * 0.5,
                     marker: true,
                     ease: Power3.easeOut
-                }, .8 );
+                }, 1 );
                 chart_tl.to( border, 1.2, {
                     "background": "linear-gradient(to bottom, #fff 0%, #000 50%, #000 50%, #5177FF 100%)",
                     autoAlpha: 1,
-                    stagger: 0.03,
-                    delay: index * 0.2,
+                    stagger: 0.1,
+                    delay: index * 0.5,
                     ease: Power3.easeOut
                 }, 1 );
         
@@ -431,7 +431,7 @@ function articlesAnimation(container){
 function worksAnimation(container){
 
     gsap.set('.work-img img', { scale: 1.3, autoAlpha: 0 })
-    gsap.set('.work-title .word, .work-tags .word, .work-link .char, .work-link img', { y: 10, autoAlpha: 0 })
+    gsap.set('.work-title, .work-tags, .work-link, .work-link img', { y: 10, autoAlpha: 0 })
     
     gsap.delayedCall(3, batch)
 
@@ -442,20 +442,20 @@ function worksAnimation(container){
                 batch.forEach((card, index) => {
 
                     let img = card.querySelectorAll('.work-img img');
-                    let content = card.querySelectorAll('.work-title .word, .work-tags .word, .work-link .char, .work-link img');
+                    let content = card.querySelectorAll('.work-title, .work-tags, .work-link, .work-link img');
                     let chart_tl = gsap.timeline();
         
                     chart_tl.to(img, 1.2, {
                         scale: 1,
                         autoAlpha: 1,
-                        delay: index * 0.2,
+                        delay: index * 0.1,
                         ease: Power3.easeOut
-                    }, 0.4);
+                    }, .3);
                     chart_tl.to(content, 0.6, {
                         y: 0,
                         autoAlpha: 1,
-                        stagger: 0.03,
-                        delay: index * 0.2,
+                        stagger: .1,
+                        delay: index * 0.1,
                         ease: Power3.easeOut
                     }, 1);
         
@@ -611,32 +611,32 @@ function contactAnimation(container){
         }
     });
 
-    //HEADLINE EACH SECTIONS
-    gsap.set(".headline .word, .headline .emoji", {
+    //HEADLINE
+    gsap.set(".headline h2, .headline p", {
         y: 10,
         autoAlpha: 0,
     }) 
 
     //FOOTER SET
     gsap.set('.keepintouch a', {y: 10, autoAlpha: 0})
-    gsap.set('.headlining h2 .char', {y: 10, autoAlpha: 0})
+    gsap.set('.headlining h2', {y: 10, autoAlpha: 0})
     gsap.set('.contact h2 .char', {y: 10, autoAlpha:0})
     gsap.set('.contact h2 .emoji', {y: 10, autoAlpha: 0})
     gsap.set('.copyright', {scaleX: 0})
-    gsap.set('.copyright .left .char, .copyright .right .char, .copyright .right img', {y: 10, autoAlpha: 0})
+    gsap.set('.copyright .left, .copyright .right, .copyright .right img', {y: 10, autoAlpha: 0})
     gsap.set('.copyright .emoji', {y: 10, autoAlpha: 0})
 
     gsap.delayedCall(3, batchy)
 
     function batchy (){
-        ScrollTrigger.batch(".headline .word, .headline .emoji", {
+        ScrollTrigger.batch(".headline h2, .headline p", {
             start: "top bottom-=100px",
             onEnter: (batch) =>
             TweenMax.staggerTo(batch, 1, {
                 y: 0,
                 autoAlpha: 1,
                 ease: Power4.easeOut
-            }, .03),
+            }, .1),
             onLeaveBack: (batch) =>
             gsap.to(batch, 1, {
                 y: 10,
@@ -650,10 +650,10 @@ function contactAnimation(container){
         })
 
         .staggerTo('.contact h2 .char, .contact h2 .emoji', 0.3, {y: 0, autoAlpha:1},0.01)
-        .staggerTo('.headlining h2 .char', 0.3, {y: 0, autoAlpha:1,},0.01)
+        .staggerTo('.headlining h2', 0.3, {y: 0, autoAlpha:1,},0.01)
         .staggerTo('.keepintouch a', 0.5, {y: 0, autoAlpha:1},0.05)
         .to('.copyright', {scaleX: 1})
-        .staggerTo('.copyright .left .char, .copyright .right .char, .copyright .emoji, .copyright .right img', 0.3, {y: 0, autoAlpha: 1},0.01)
+        .staggerTo('.copyright .left, .copyright .right, .copyright .emoji, .copyright .right img', 0.3, {y: 0, autoAlpha: 1},0.01)
         .to('.copyright .emoji', 0.3, {"animation": "heartbeat 1.8s infinite"})
         .to('.footer', 0.3, {onComplete: function(){
             TweenMax.set('.footer', {className:"footer footer-gradient"})
@@ -700,12 +700,10 @@ barba.init({
             coverAnimationEnter(next.container);
             indexAnimationEnter(next.container);
             footerEnabler(next.container);
-            initSmoothScrolling();
         },
         once({next}) {
             indexAnimationEnter(next.container);
             footerEnabler(next.container);
-            initSmoothScrolling();
         }
     },
     {
@@ -722,7 +720,6 @@ barba.init({
             worksAnimation(next.container);
             resourcesAnimation(next.container);
             footerEnabler(next.container);
-            initSmoothScrolling();
         },
         once({next}) {
             coverAnimationLoad(next.container);
@@ -732,7 +729,6 @@ barba.init({
             worksAnimation(next.container);
             resourcesAnimation(next.container);
             footerEnabler(next.container);
-            initSmoothScrolling();
         }
     },
     {
@@ -747,7 +743,6 @@ barba.init({
             aboutInit(next.container);
             aboutAnimation(next.container);
             footerEnabler(next.container);
-            initSmoothScrolling();
         },
         once({next}) {
             coverAnimationLoad(next.container);
@@ -755,7 +750,6 @@ barba.init({
             aboutInit(next.container);
             aboutAnimation(next.container);
             footerEnabler(next.container);
-            initSmoothScrolling();
         }
     },
     {
@@ -770,7 +764,6 @@ barba.init({
             radialBackgroundInit(next.container);
             articlesAnimation(next.container);
             footerEnabler(next.container);
-            initSmoothScrolling();
         },
         once({next}) {
             coverAnimationLoad(next.container);
@@ -778,7 +771,6 @@ barba.init({
             radialBackgroundInit(next.container);
             articlesAnimation(next.container);
             footerEnabler(next.container);
-            initSmoothScrolling();
         }
     },
     {
@@ -793,7 +785,6 @@ barba.init({
             radialBackgroundInit(next.container);
             worksAnimation(next.container);
             footerEnabler(next.container);
-            initSmoothScrolling();
         },
         once({next}) {
             coverAnimationLoad(next.container);
@@ -801,7 +792,6 @@ barba.init({
             radialBackgroundInit(next.container);
             worksAnimation(next.container);
             footerEnabler(next.container);
-            initSmoothScrolling();
         }
     },
     {
@@ -816,7 +806,6 @@ barba.init({
             radialBackgroundInit(next.container);
             resourcesAnimation(next.container);
             footerEnabler(next.container);
-            initSmoothScrolling();
         },
         once({next}) {
             coverAnimationLoad(next.container);
@@ -824,7 +813,6 @@ barba.init({
             radialBackgroundInit(next.container);
             resourcesAnimation(next.container);
             footerEnabler(next.container);
-            initSmoothScrolling();
         }
     },
     {
@@ -839,7 +827,6 @@ barba.init({
             detailInit(next.container);
             detailAnimation(next.container);
             footerEnabler(next.container);
-            initSmoothScrolling();
         },
         once({next}) {
             coverAnimationLoad(next.container);
@@ -847,7 +834,6 @@ barba.init({
             detailInit(next.container);
             detailAnimation(next.container);
             footerEnabler(next.container);
-            initSmoothScrolling();
         }
     },
     {
@@ -860,13 +846,11 @@ barba.init({
             coverAnimationEnter(next.container);
             contactAnimation(next.container);
             footerRemover(next.container);
-            initSmoothScrolling();
         },
         once({next}) {
             coverAnimationLoad(next.container);
             contactAnimation(next.container);
             footerRemover(next.container);
-            initSmoothScrolling();
         }
     }]
 });
