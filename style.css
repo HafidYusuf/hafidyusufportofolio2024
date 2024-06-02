@@ -1093,7 +1093,6 @@ a.underline:hover::after {
   height: 500px;
   background: transparent;
   overflow: hidden;
-  margin-bottom: 60px;
   position: relative;
   z-index: 1;
 }
